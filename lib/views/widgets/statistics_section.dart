@@ -1,5 +1,4 @@
 import 'package:farmer_admin_app/controllers/dashboard.controller.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,8 +38,8 @@ class _StatisticsSectionState extends State<StatisticsSection> {
             _buildDashboardCards(),
             SizedBox(height: 30),
 
-            // Charts Row (responsive layout)
-            _buildChartsRow(),
+            // Removed Charts Row - No charts here
+            // You can add any other widgets here if needed
           ],
         ),
       ),
@@ -115,75 +114,6 @@ class _StatisticsSectionState extends State<StatisticsSection> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  // Build the charts row with responsive layout
-  Widget _buildChartsRow() {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // Depending on screen width, decide the number of charts in a row
-        int chartCount = constraints.maxWidth > 600 ? 2 : 1; // If screen is large, show 2 charts in a row
-
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            for (int i = 0; i < chartCount; i++)
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: _buildLineChart(),
-                ),
-              ),
-          ],
-        );
-      },
-    );
-  }
-
-  // Build the Line Chart
-  Widget _buildLineChart() {
-    return _buildChartContainer(
-      title: "Sales Trend",
-      chart: LineChart(
-        LineChartData(
-          gridData: FlGridData(),
-          lineBarsData: [
-            LineChartBarData(
-              spots: [FlSpot(0, 1), FlSpot(1, 3), FlSpot(2, 1.5)], // Example data points
-              isCurved: true,
-              color: Colors.blue,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Container for the chart
-  Widget _buildChartContainer({required String title, required Widget chart}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 8)],
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(
-            height: 250, // Fixed height for the chart (can be made dynamic)
-            child: chart,
-          ),
-        ],
       ),
     );
   }
