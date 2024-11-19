@@ -6,10 +6,11 @@ import 'package:farmer_admin_app/views/widgets/products_section.dart';
 import 'package:farmer_admin_app/views/widgets/sales_section.dart';
 import 'package:farmer_admin_app/views/widgets/statistics_section.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart'; // Assuming you're using GetX for state management
 
 class Dashboard extends StatelessWidget {
-  final DashboardController controller = Get.find();
+  final DashboardController controller = Get.find(); // Assuming you have a controller
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,10 @@ class Dashboard extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
-            onPressed: () {}, // Implement logout functionality
+            onPressed: () {
+              // Close the app when logout button is pressed
+              SystemNavigator.pop(); // This closes the app
+            },
           ),
         ],
       ),
@@ -89,7 +93,6 @@ class Dashboard extends StatelessWidget {
           ),
         ),
         Divider(color: Colors.white.withOpacity(0.3)),
-        // Insert the image below the "Main Menu" heading
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20),
           child: Center(
@@ -178,10 +181,12 @@ class Dashboard extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Icon(
-            Icons.logout,
-            color: Colors.green,
-            size: 30,
+          IconButton(
+            icon: Icon(Icons.logout, color: Colors.green, size: 30),
+            onPressed: () {
+              // Close the app when logout button is pressed
+              SystemNavigator.pop(); // This closes the app
+            },
           ),
         ],
       ),
@@ -209,5 +214,4 @@ class Dashboard extends StatelessWidget {
       }
     });
   }
-
 }
